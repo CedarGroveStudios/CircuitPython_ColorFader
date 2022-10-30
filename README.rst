@@ -9,8 +9,8 @@ Introduction
     :alt: Discord
 
 
-.. image:: https://github.com/CedarGroveStudios/Cedargrove_CircuitPython_ColorFader/workflows/Build%20CI/badge.svg
-    :target: https://github.com/CedarGroveStudios/Cedargrove_CircuitPython_ColorFader/actions
+.. image:: https://github.com/CedarGroveStudios/CircuitPython_ColorFader/workflows/Build%20CI/badge.svg
+    :target: https://github.com/CedarGroveStudios/CircuitPython_ColorFader/actions
     :alt: Build Status
 
 
@@ -18,8 +18,11 @@ Introduction
     :target: https://github.com/psf/black
     :alt: Code Style: Black
 
-A CircuitPython helper for brightness and gamma adjustment of an integer RGB color value.
-
+A CircuitPython helper for brightness and gamma adjustment of an integer RGB
+color value. Gamma is optionally applied after the brightness calculation.
+Transparency is preserved. Returns an adjusted integer color value.
+To adjust a ``displayio`` palette or multiple color list, use the
+``cedargrove_palettefader.PaletteFader`` class.
 
 Dependencies
 =============
@@ -31,35 +34,7 @@ Please ensure all dependencies are available on the CircuitPython filesystem.
 This is easily achieved by downloading
 `the Adafruit library and driver bundle <https://circuitpython.org/libraries>`_
 or individual libraries can be installed using
-`circup <https://github.com/adafruit/circup>`_.Installing from PyPI
-=====================
-.. note:: This library is not available on PyPI yet. Install documentation is included
-   as a standard element. Stay tuned for PyPI availability!
-
-.. todo:: Remove the above note if PyPI version is/will be available at time of release.
-
-On supported GNU/Linux systems like the Raspberry Pi, you can install the driver locally `from
-PyPI <https://pypi.org/project/Cedargrove-circuitpython-colorfader/>`_.
-To install for current user:
-
-.. code-block:: shell
-
-    pip3 install Cedargrove-circuitpython-colorfader
-
-To install system-wide (this may be required in some cases):
-
-.. code-block:: shell
-
-    sudo pip3 install Cedargrove-circuitpython-colorfader
-
-To install in a virtual environment in your current project:
-
-.. code-block:: shell
-
-    mkdir project-name && cd project-name
-    python3 -m venv .venv
-    source .env/bin/activate
-    pip3 install Cedargrove-circuitpython-colorfader
+`circup <https://github.com/adafruit/circup>`_.
 
 Installing to a Connected CircuitPython Device with Circup
 ==========================================================
@@ -76,7 +51,7 @@ following command to install:
 
 .. code-block:: shell
 
-    circup install colorfader
+    circup install cedargrove_colorfader
 
 Or the following command to update an existing version:
 
@@ -87,12 +62,22 @@ Or the following command to update an existing version:
 Usage Example
 =============
 
-.. todo:: Add a quick, simple example. It and other examples should live in the
-examples folder and be included in docs/examples.rst.
+Scale a 24-bit RGB source color value in proportion to the brightness setting
+(0 to 1.0). The adjusted color's gamma value is typically from 0.0 to 2.0 with
+a default of 1.0 for no gamma adjustment. Returns an adjusted 24-bit RGB color
+value or None if the source color is None (transparent).
+
+.. code-block:: python
+
+    >>> from cedargrove_colorfader import color_fader
+    >>> # Dim a pure red color to 50%; no gamma adjustment
+    >>> print(hex(color_fader(source_color=0xFF0000, brightness=0.5, gamma=1.0)
+    0x7f0000
+
 
 Documentation
 =============
-API documentation for this library can be found on `Read the Docs <https://circuitpython-colorfader.readthedocs.io/>`_.
+API documentation for this library can be found `here <https://circuitpython-colorfader.readthedocs.io/>`_.
 
 For information on building library documentation, please check out
 `this guide <https://learn.adafruit.com/creating-and-sharing-a-circuitpython-library/sharing-our-docs-on-readthedocs#sphinx-5-1>`_.
@@ -101,5 +86,5 @@ Contributing
 ============
 
 Contributions are welcome! Please read our `Code of Conduct
-<https://github.com/CedarGroveStudios/Cedargrove_CircuitPython_ColorFader/blob/HEAD/CODE_OF_CONDUCT.md>`_
+<https://github.com/CedarGroveStudios/CircuitPython_ColorFader/blob/HEAD/CODE_OF_CONDUCT.md>`_
 before contributing to help this project stay welcoming.
