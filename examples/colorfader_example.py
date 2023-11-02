@@ -35,7 +35,7 @@ delta_x = 2
 delta_y = 2
 
 # Showing the items on the screen
-display.show(main_group)
+display.root_group = main_group
 
 circle.fill = 0xFF0000
 brightness = 0
